@@ -4,45 +4,56 @@ import org.junit.jupiter.api.Test;
 import org.powermock.reflect.Whitebox;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class JawsDBMySQLTest {
+class JawsDBMySQLTest {
     @Test
-    public void isDetectedTest() {
-        Whitebox.setInternalState(JawsDBMySQL.class, "DETECTED", false);
-        assertFalse(JawsDBMySQL.isDetected());
-        Whitebox.setInternalState(JawsDBMySQL.class, "DETECTED", true);
-        assertTrue(JawsDBMySQL.isDetected());
+    void getTest() {
+        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
+        Whitebox.setInternalState(JawsDBMySQL.class, "INSTANCE", jawsDBMySQL);
+        assertSame(jawsDBMySQL, JawsDBMySQL.get());
     }
 
     @Test
-    public void getHostTest() {
-        Whitebox.setInternalState(JawsDBMySQL.class, "HOST", "host");
-        assertEquals("host", JawsDBMySQL.getHost());
+    void constructorTest() {
+        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        result.host = "host";
+        result.username = "username";
+        result.password = "password";
+        result.port = 3306;
+        result.database = "database";
+
+        final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
+        assertEquals("host", jawsDBMySQL.getHost());
+        assertEquals("username", jawsDBMySQL.getUsername());
+        assertEquals("password", jawsDBMySQL.getPassword());
+        assertEquals(3306, jawsDBMySQL.getPort());
+        assertEquals("database", jawsDBMySQL.getDatabase());
     }
 
     @Test
-    public void getUsernameTest() {
-        Whitebox.setInternalState(JawsDBMySQL.class, "USERNAME", "username");
-        assertEquals("username", JawsDBMySQL.getUsername());
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    void getUsernameTest_illegalState() {
+        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
+        assertThrows(IllegalStateException.class, jawsDBMySQL::getUsername);
     }
 
     @Test
-    public void getPasswordTest() {
-        Whitebox.setInternalState(JawsDBMySQL.class, "PASSWORD", "password");
-        assertEquals("password", JawsDBMySQL.getPassword());
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    void getPasswordTest_illegalState() {
+        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
+        assertThrows(IllegalStateException.class, jawsDBMySQL::getPassword);
     }
 
     @Test
-    public void getDatabaseTest() {
-        Whitebox.setInternalState(JawsDBMySQL.class, "DATABASE", "database");
-        assertEquals("database", JawsDBMySQL.getDatabase());
-    }
-
-    @Test
-    public void getPortTest() {
-        Whitebox.setInternalState(JawsDBMySQL.class, "PORT", 3306);
-        assertEquals(3306, JawsDBMySQL.getPort());
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    void getDatabaseTest_illegalState() {
+        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
+        assertThrows(IllegalStateException.class, jawsDBMySQL::getDatabase);
     }
 }

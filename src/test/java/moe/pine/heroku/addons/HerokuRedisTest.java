@@ -30,6 +30,7 @@ class HerokuRedisTest {
     }
 
     @Test
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     void getPasswordTest_illegalState() {
         final RedisUrlParser.Result result = new RedisUrlParser.Result();
         final HerokuRedis herokuRedis = new HerokuRedis(result);

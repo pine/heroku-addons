@@ -2,12 +2,12 @@ package moe.pine.heroku.addons;
 
 import javax.annotation.Nullable;
 
-public class HerokuRedis {
+public final class HerokuRedis {
     private static HerokuRedis INSTANCE;
 
-    private String host;
-    private String password;
-    private int port;
+    private final String host;
+    private final String password;
+    private final int port;
 
     static {
         final String redisUrl = System.getenv("REDIS_URL");
@@ -34,7 +34,7 @@ public class HerokuRedis {
 
     public String getPassword() {
         if (password == null) {
-            throw new IllegalStateException("Heroku Redis should have password, but not.");
+            throw new IllegalStateException("Heroku Redis should have `password`, but not.");
         }
         return password;
     }
