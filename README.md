@@ -17,6 +17,12 @@ depepdencies {
 }
 ```
 
+## Supported add-ons
+Don' you find what you need? We look forward to your contribution :smile:
+
+- [Heroku Redis](https://elements.heroku.com/addons/heroku-redis)
+- [JawsDB MySQL](https://elements.heroku.com/addons/jawsdb)
+
 ## Usage
 
 ```java
