@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class RedisUrlParserTest {
+class RedisUrlParserTest {
     @Test
-    public void parserTest() {
+    void parserTest() {
         final RedisUrlParser.Result result =
             RedisUrlParser.parse("redis://h:password@host:6380");
         assertNotNull(result);
@@ -18,7 +18,7 @@ public class RedisUrlParserTest {
     }
 
     @Test
-    public void parseTest_emptyUserInfo() {
+    void parseTest_emptyUserInfo() {
         final RedisUrlParser.Result result =
             RedisUrlParser.parse("redis://host:6380");
         assertNotNull(result);
@@ -28,17 +28,27 @@ public class RedisUrlParserTest {
     }
 
     @Test
-    public void parseTest_emptyUrl() {
+    void parseTest_usernameOnly() {
+        final RedisUrlParser.Result result =
+            RedisUrlParser.parse("redis://h@host:6380");
+        assertNotNull(result);
+        assertEquals("host", result.host);
+        assertNull(result.password);
+        assertEquals(6380, result.port);
+    }
+
+    @Test
+    void parseTest_emptyUrl() {
         assertNull(RedisUrlParser.parse(""));
     }
 
     @Test
-    public void parseTest_nullUrl() {
+    void parseTest_nullUrl() {
         assertNull(RedisUrlParser.parse(null));
     }
 
     @Test
-    public void parseTest_illegalUrl() {
+    void parseTest_illegalUrl() {
         assertNull(RedisUrlParser.parse(":/+$@*+$$%"));
     }
 }

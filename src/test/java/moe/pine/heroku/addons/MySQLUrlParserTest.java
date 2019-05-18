@@ -3,12 +3,14 @@ package moe.pine.heroku.addons;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class MySQLUrlParserTest {
+class MySQLUrlParserTest {
     @Test
-    public void parserTest() {
+    void parserTest() {
         final MySQLUrlParser.Result result =
             MySQLUrlParser.parse("mysql://username:password@host:3306/database");
+        assertNotNull(result);
         assertEquals("host", result.host);
         assertEquals("username", result.username);
         assertEquals("password", result.password);
