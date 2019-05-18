@@ -29,10 +29,11 @@ Don' you find what you need? We look forward to your contribution :smile:
 ```java
 import moe.pine.heroku.addons.HerokuRedis;
 
-if (HerokuRedis.isDetected()) {
-    System.out.println("Host     : " + HerokuRedis.getHost());
-    System.out.println("Password : " + HerokuRedis.getPassword());
-    System.out.println("Port     : " + HerokuRedis.getPort());    
+final HerokuRedis redis = HerokuRedis.get();
+if (redis != null) {
+    System.out.println("Host     : " + redis.getHost());
+    System.out.println("Password : " + redis.getPassword());
+    System.out.println("Port     : " + redis.getPort());
 }
 ```
 
