@@ -13,6 +13,8 @@ depepdencies {
 }
 ```
 
+## Usage
+
 ```java
 import moe.pine.heroku.addons.HerokuRedis;
 
@@ -22,6 +24,22 @@ if (HerokuRedis.isDetected()) {
     System.out.println("Port     : " + HerokuRedis.getPort());    
 }
 ```
+
+## Development
+### Test
+
+```
+$ ./gradlew clean test
+```
+
+### Upload Bintray
+
+```
+$ export BINTRAY_USER=username
+$ export BINTRAY_KEY=apiKey
+$ ./gradlew clean assemble bintrayUpload
+```
+
 
 ## License
 MIT &copy; [Pine Mizune](https://profile.pine.moe)
