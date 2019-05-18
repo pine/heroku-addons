@@ -4,13 +4,16 @@ import javax.annotation.Nullable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-class MySQLUrlParser {
+final class MySQLUrlParser {
     static final class Result {
         String host;
         String username;
         String password;
         String database;
         int port;
+    }
+
+    private MySQLUrlParser() {
     }
 
     @Nullable

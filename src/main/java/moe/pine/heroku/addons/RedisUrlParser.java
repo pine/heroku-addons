@@ -4,11 +4,14 @@ import javax.annotation.Nullable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-class RedisUrlParser {
+final class RedisUrlParser {
     static final class Result {
         String host;
         String password;
         int port;
+    }
+
+    private RedisUrlParser() {
     }
 
     @Nullable
