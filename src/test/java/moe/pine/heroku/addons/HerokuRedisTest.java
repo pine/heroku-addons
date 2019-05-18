@@ -5,6 +5,7 @@ import org.powermock.reflect.Whitebox;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class HerokuRedisTest {
     @Test
@@ -26,5 +27,12 @@ class HerokuRedisTest {
         assertEquals("host", herokuRedis.getHost());
         assertEquals("password", herokuRedis.getPassword());
         assertEquals(6380, herokuRedis.getPort());
+    }
+
+    @Test
+    void getPasswordTest_illegalState() {
+        final RedisUrlParser.Result result = new RedisUrlParser.Result();
+        final HerokuRedis herokuRedis = new HerokuRedis(result);
+        assertThrows(IllegalStateException.class, herokuRedis::getPassword);
     }
 }
