@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class HerokuRedisTest {
     @Test
     public void parserTest() {
-        final HerokuRedis.Parser parser = new HerokuRedis.Parser();
-        final HerokuRedis.ParserResult parserResult = parser.parse("redis://h:password@host:6380");
+        final HerokuRedis.ParserResult parserResult =
+            HerokuRedis.Parser.parse("redis://h:password@host:6380");
         assertEquals("host", parserResult.host);
         assertEquals("password", parserResult.password);
         assertEquals(6380, parserResult.port);

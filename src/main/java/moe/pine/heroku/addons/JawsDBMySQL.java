@@ -13,7 +13,7 @@ public final class JawsDBMySQL {
 
     static final class Parser {
         @SuppressWarnings("Duplicates")
-        ParserResult parse(final String jawsDbUrl) {
+        static ParserResult parse(final String jawsDbUrl) {
             if (jawsDbUrl == null) return null;
             if (jawsDbUrl.isEmpty()) return null;
 
@@ -52,8 +52,7 @@ public final class JawsDBMySQL {
 
     static {
         final String redisUrl = System.getenv("JAWSDB_URL");
-        final Parser parser = new Parser();
-        final ParserResult parserResult = parser.parse(redisUrl);
+        final ParserResult parserResult = Parser.parse(redisUrl);
         if (parserResult != null) {
             DETECTED = true;
             HOST = parserResult.host;

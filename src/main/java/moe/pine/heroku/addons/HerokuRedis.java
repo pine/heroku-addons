@@ -12,7 +12,7 @@ public final class HerokuRedis {
 
     static final class Parser {
         @SuppressWarnings("Duplicates")
-        ParserResult parse(final String redisUrl) {
+        static ParserResult parse(final String redisUrl) {
             if (redisUrl == null) return null;
             if (redisUrl.isEmpty()) return null;
 
@@ -43,8 +43,7 @@ public final class HerokuRedis {
 
     static {
         final String redisUrl = System.getenv("REDIS_URL");
-        final Parser parser = new Parser();
-        final ParserResult parserResult = parser.parse(redisUrl);
+        final ParserResult parserResult = Parser.parse(redisUrl);
         if (parserResult != null) {
             DETECTED = true;
             HOST = parserResult.host;

@@ -7,9 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class JawsDBMySQLTest {
     @Test
     public void parserTest() {
-        final JawsDBMySQL.Parser parser = new JawsDBMySQL.Parser();
         final JawsDBMySQL.ParserResult parserResult =
-            parser.parse("mysql://username:password@host:3306/database");
+            JawsDBMySQL.Parser.parse("mysql://username:password@host:3306/database");
         assertEquals("host", parserResult.host);
         assertEquals("username", parserResult.username);
         assertEquals("password", parserResult.password);
