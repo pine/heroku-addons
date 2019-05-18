@@ -6,6 +6,7 @@
 > :mag: Heroku add-ons utilities.
 
 ## Getting started
+The library is published to [Bintray](https://bintray.com/pinemz/maven/heroku-addons).
 
 ```gradle
 repositories {
