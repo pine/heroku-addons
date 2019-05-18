@@ -1,5 +1,6 @@
 package moe.pine.heroku.addons;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public final class JawsDBMySQL {
@@ -32,10 +33,12 @@ public final class JawsDBMySQL {
         return INSTANCE;
     }
 
+    @Nonnull
     public String getHost() {
         return host;
     }
 
+    @Nonnull
     public String getUsername() {
         if (username == null) {
             throw new IllegalStateException("JawsDB MySQL should have `username`. but not.");
@@ -43,6 +46,7 @@ public final class JawsDBMySQL {
         return username;
     }
 
+    @Nonnull
     public String getPassword() {
         if (password == null) {
             throw new IllegalStateException("JawsDB MySQL should have `password`, but not.");
@@ -50,6 +54,7 @@ public final class JawsDBMySQL {
         return password;
     }
 
+    @Nonnull
     public String getDatabase() {
         if (database == null) {
             throw new IllegalStateException("JawsDB MySQL should have `database`, but not.");

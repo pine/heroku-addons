@@ -1,5 +1,6 @@
 package moe.pine.heroku.addons;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public final class HerokuRedis {
@@ -28,10 +29,12 @@ public final class HerokuRedis {
         return INSTANCE;
     }
 
+    @Nonnull
     public String getHost() {
         return host;
     }
 
+    @Nonnull
     public String getPassword() {
         if (password == null) {
             throw new IllegalStateException("Heroku Redis should have `password`, but not.");
