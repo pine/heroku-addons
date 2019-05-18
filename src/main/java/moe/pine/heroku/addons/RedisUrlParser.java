@@ -19,6 +19,7 @@ class RedisUrlParser {
         try {
             parsedUri = new URI(redisUrl);
         } catch (URISyntaxException e) {
+            e.printStackTrace();
             return null;
         }
 

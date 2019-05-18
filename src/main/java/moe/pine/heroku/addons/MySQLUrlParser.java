@@ -21,6 +21,7 @@ class MySQLUrlParser {
         try {
             parsedUri = new URI(mysqlUrl);
         } catch (URISyntaxException e) {
+            e.printStackTrace();
             return null;
         }
 
