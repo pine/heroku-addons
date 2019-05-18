@@ -1,4 +1,4 @@
-# heroku-addons
+# heroku-addons &nbsp;[![Build Status](https://travis-ci.com/pine/heroku-addons.svg?branch=master)](https://travis-ci.com/pine/heroku-addons)
 
 ## Getting started
 
