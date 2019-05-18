@@ -1,5 +1,7 @@
 package moe.pine.heroku.addons;
 
+import javax.annotation.Nullable;
+
 public final class JawsDBMySQL {
     private static boolean DETECTED;
     private static String HOST;
@@ -28,18 +30,22 @@ public final class JawsDBMySQL {
         return DETECTED;
     }
 
+    @Nullable
     public static String getHost() {
         return HOST;
     }
 
+    @Nullable
     public static String getUsername() {
         return USERNAME;
     }
 
+    @Nullable
     public static String getPassword() {
         return PASSWORD;
     }
 
+    @Nullable
     public static String getDatabase() {
         return DATABASE;
     }

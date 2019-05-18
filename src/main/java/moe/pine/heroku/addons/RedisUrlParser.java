@@ -1,5 +1,6 @@
 package moe.pine.heroku.addons;
 
+import javax.annotation.Nullable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -10,8 +11,9 @@ class RedisUrlParser {
         int port;
     }
 
+    @Nullable
     @SuppressWarnings("Duplicates")
-    static Result parse(final String redisUrl) {
+    static Result parse(@Nullable final String redisUrl) {
         if (redisUrl == null) return null;
         if (redisUrl.isEmpty()) return null;
 
@@ -19,7 +21,6 @@ class RedisUrlParser {
         try {
             parsedUri = new URI(redisUrl);
         } catch (URISyntaxException e) {
-            e.printStackTrace();
             return null;
         }
 

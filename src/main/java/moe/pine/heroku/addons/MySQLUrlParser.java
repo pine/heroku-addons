@@ -1,5 +1,6 @@
 package moe.pine.heroku.addons;
 
+import javax.annotation.Nullable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -12,8 +13,9 @@ class MySQLUrlParser {
         int port;
     }
 
+    @Nullable
     @SuppressWarnings("Duplicates")
-    static Result parse(final String mysqlUrl) {
+    static Result parse(@Nullable final String mysqlUrl) {
         if (mysqlUrl == null) return null;
         if (mysqlUrl.isEmpty()) return null;
 

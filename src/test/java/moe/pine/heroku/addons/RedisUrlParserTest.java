@@ -3,6 +3,7 @@ package moe.pine.heroku.addons;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class RedisUrlParserTest {
     @Test
@@ -14,4 +15,18 @@ public class RedisUrlParserTest {
         assertEquals(6380, result.port);
     }
 
+    @Test
+    public void parseTest_emptyUrl() {
+        assertNull(RedisUrlParser.parse(""));
+    }
+
+    @Test
+    public void parseTest_nullUrl() {
+        assertNull(RedisUrlParser.parse(null));
+    }
+
+    @Test
+    public void parseTest_illegalUrl() {
+        assertNull(RedisUrlParser.parse(":/+$@*+$$%"));
+    }
 }
