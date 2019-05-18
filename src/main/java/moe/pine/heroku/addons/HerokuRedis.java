@@ -4,6 +4,7 @@ package moe.pine.heroku.addons;
 import java.net.URI;
 
 public final class HerokuRedis {
+    private static boolean DETECTED;
     private static String REDIS_HOST;
     private static String REDIS_PASSWORD;
     private static int REDIS_PORT;
@@ -34,6 +35,7 @@ public final class HerokuRedis {
         final Parser parser = new Parser();
         final ParserResult parserResult = parser.parse(redisUrl);
         if (parserResult != null) {
+            DETECTED = true;
             REDIS_HOST = parserResult.host;
             REDIS_PASSWORD = parserResult.password;
             REDIS_PORT = parserResult.port;
@@ -41,6 +43,10 @@ public final class HerokuRedis {
     }
 
     private HerokuRedis() {
+    }
+
+    public static boolean isDetected() {
+        return DETECTED;
     }
 
     public static String getHost() {
