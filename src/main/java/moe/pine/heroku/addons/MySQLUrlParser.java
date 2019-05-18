@@ -43,7 +43,7 @@ final class MySQLUrlParser {
             }
         }
 
-        if (parsedUri.getPath() != null) {
+        if (parsedUri.getPath() != null && parsedUri.getPath().length() > 1) {
             result.database = parsedUri.getPath().substring(1);
         }
 

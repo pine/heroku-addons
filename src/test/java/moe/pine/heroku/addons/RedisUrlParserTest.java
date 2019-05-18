@@ -18,7 +18,7 @@ class RedisUrlParserTest {
     }
 
     @Test
-    void parseTest_emptyUserInfo() {
+    void parseTest_noUserInfo() {
         final RedisUrlParser.Result result =
             RedisUrlParser.parse("redis://host:6380");
         assertNotNull(result);

@@ -24,9 +24,32 @@ class MySQLUrlParserTest {
         final MySQLUrlParser.Result result =
             MySQLUrlParser.parse("mysql://username@host:3306/database");
         assertNotNull(result);
-        assertEquals("host", result.host);
         assertNull(result.password);
+        assertEquals("host", result.host);
         assertEquals("username", result.username);
+        assertEquals("database", result.database);
+        assertEquals(3306, result.port);
+    }
+
+    @Test
+    void parseTest_noUserInfo() {
+        final MySQLUrlParser.Result result =
+            MySQLUrlParser.parse("mysql://host:3306/database");
+        assertNotNull(result);
+        assertNotNull(result);
+        assertEquals("host", result.host);
+        assertEquals("database", result.database);
+        assertEquals(3306, result.port);
+    }
+
+    @Test
+    void parseTest_noDatabase() {
+        final MySQLUrlParser.Result result =
+            MySQLUrlParser.parse("mysql://username:password@host:3306");
+        assertNotNull(result);
+        assertEquals("host", result.host);
+        assertEquals("username", result.username);
+        assertEquals("password", result.password);
         assertEquals(3306, result.port);
     }
 
