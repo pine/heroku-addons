@@ -1,5 +1,11 @@
 buildscript {
     ext {
+        version = '2.0.0'
+        description = 'Heroku add-ons utilities.'
+        group = 'moe.pine'
+        siteUrl = 'https://github.com/pine/heroku-addons'
+        gitUrl = 'https://github.com/pine/heroku-addons.git'
+        userOrg = 'pinemz'
     }
     repositories {
         jcenter()
@@ -7,6 +13,8 @@ buildscript {
     }
     dependencies {
         classpath 'net.rdrei.android.buildtimetracker:gradle-plugin:0.11.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
     }
 }
 
@@ -14,7 +22,9 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
 
-    group 'moe.pine.heroku.addons'
+    group rootProject.ext.group
+    version rootProject.ext.version
+    description rootProject.ext.description
 
     repositories {
         jcenter()
@@ -33,8 +43,9 @@ allprojects {
     dependencies {
         testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
         testImplementation 'org.powermock:powermock-reflect:2.0.2'
-
     }
+
+    apply from: "${rootProject.projectDir}/gradle/bintray.gradle"
 }
 
 
