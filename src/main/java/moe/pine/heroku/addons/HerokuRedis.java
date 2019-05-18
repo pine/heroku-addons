@@ -2,41 +2,44 @@ package moe.pine.heroku.addons;
 
 import javax.annotation.Nullable;
 
-public final class HerokuRedis {
-    private static boolean DETECTED;
-    private static String HOST;
-    private static String PASSWORD;
-    private static int PORT;
+public class HerokuRedis {
+    private static HerokuRedis INSTANCE;
+
+    private String host;
+    private String password;
+    private int port;
 
     static {
         final String redisUrl = System.getenv("REDIS_URL");
         final RedisUrlParser.Result result = RedisUrlParser.parse(redisUrl);
         if (result != null) {
-            DETECTED = true;
-            HOST = result.host;
-            PASSWORD = result.password;
-            PORT = result.port;
+            INSTANCE = new HerokuRedis(result);
         }
     }
 
-    private HerokuRedis() {
-    }
-
-    public static boolean isDetected() {
-        return DETECTED;
-    }
-
-    @Nullable
-    public static String getHost() {
-        return HOST;
+    HerokuRedis(RedisUrlParser.Result result) {
+        host = result.host;
+        password = result.password;
+        port = result.port;
     }
 
     @Nullable
-    public static String getPassword() {
-        return PASSWORD;
+    public static HerokuRedis get() {
+        return INSTANCE;
     }
 
-    public static int getPort() {
-        return PORT;
+    public String getHost() {
+        return host;
+    }
+
+    public String getPassword() {
+        if (password == null) {
+            throw new IllegalStateException("Heroku Redis should have password, but not.");
+        }
+        return password;
+    }
+
+    public int getPort() {
+        return port;
     }
 }

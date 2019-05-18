@@ -4,33 +4,27 @@ import org.junit.jupiter.api.Test;
 import org.powermock.reflect.Whitebox;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
-public class HerokuRedisTest {
+class HerokuRedisTest {
     @Test
-    public void isDetectedTest() {
-        Whitebox.setInternalState(HerokuRedis.class, "DETECTED", false);
-        assertFalse(HerokuRedis.isDetected());
-        Whitebox.setInternalState(HerokuRedis.class, "DETECTED", true);
-        assertTrue(HerokuRedis.isDetected());
+    void getTest() {
+        final RedisUrlParser.Result result = new RedisUrlParser.Result();
+        final HerokuRedis herokuRedis = new HerokuRedis(result);
+        Whitebox.setInternalState(HerokuRedis.class, "INSTANCE", herokuRedis);
+        assertSame(herokuRedis, HerokuRedis.get());
     }
 
     @Test
-    public void getHostTest() {
-        Whitebox.setInternalState(HerokuRedis.class, "HOST", "host");
-        assertEquals("host", HerokuRedis.getHost());
-    }
+    void constructorTest() {
+        final RedisUrlParser.Result result = new RedisUrlParser.Result();
+        result.host = "host";
+        result.password = "password";
+        result.port = 6380;
 
-    @Test
-    public void getPasswordTest() {
-        Whitebox.setInternalState(HerokuRedis.class, "PASSWORD", "password");
-        assertEquals("password", HerokuRedis.getPassword());
-    }
-
-    @Test
-    public void getPortTest() {
-        Whitebox.setInternalState(HerokuRedis.class, "PORT", 6380);
-        assertEquals(6380, HerokuRedis.getPort());
+        final HerokuRedis herokuRedis = new HerokuRedis(result);
+        assertEquals("host", herokuRedis.getHost());
+        assertEquals("password", herokuRedis.getPassword());
+        assertEquals(6380, herokuRedis.getPort());
     }
 }
