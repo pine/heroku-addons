@@ -8,12 +8,12 @@ public final class HerokuRedis {
 
     static {
         final String redisUrl = System.getenv("REDIS_URL");
-        final RedisUrlParser.Result parserResult = RedisUrlParser.parse(redisUrl);
-        if (parserResult != null) {
+        final RedisUrlParser.Result result = RedisUrlParser.parse(redisUrl);
+        if (result != null) {
             DETECTED = true;
-            HOST = parserResult.host;
-            PASSWORD = parserResult.password;
-            PORT = parserResult.port;
+            HOST = result.host;
+            PASSWORD = result.password;
+            PORT = result.port;
         }
     }
 

@@ -24,20 +24,20 @@ class MySQLUrlParser {
             return null;
         }
 
-        final Result parserResult = new Result();
-        parserResult.host = parsedUri.getHost();
-        parserResult.port = parsedUri.getPort();
+        final Result result = new Result();
+        result.host = parsedUri.getHost();
+        result.port = parsedUri.getPort();
 
         if (parsedUri.getUserInfo() != null) {
             final String[] userInfo = parsedUri.getUserInfo().split(":", 2);
-            parserResult.username = userInfo[0];
-            parserResult.password = userInfo[1];
+            result.username = userInfo[0];
+            result.password = userInfo[1];
         }
 
         if (parsedUri.getPath() != null) {
-            parserResult.database = parsedUri.getPath().substring(1);
+            result.database = parsedUri.getPath().substring(1);
         }
 
-        return parserResult;
+        return result;
     }
 }
