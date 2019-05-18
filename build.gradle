@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        version = '0.2.0'
+        version = '0.2.1'
         description = 'Heroku add-ons utilities.'
         group = 'moe.pine'
         siteUrl = 'https://github.com/pine/heroku-addons'
