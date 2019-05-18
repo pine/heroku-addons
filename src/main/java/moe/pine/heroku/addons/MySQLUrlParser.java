@@ -35,11 +35,9 @@ final class MySQLUrlParser {
 
         if (parsedUri.getUserInfo() != null) {
             final String[] userInfo = parsedUri.getUserInfo().split(":", 2);
-            if (userInfo.length > 0) {
-                result.username = userInfo[0];
-                if (userInfo.length > 1) {
-                    result.password = userInfo[1];
-                }
+            result.username = userInfo[0];
+            if (userInfo.length > 1) {
+                result.password = userInfo[1];
             }
         }
 
