@@ -27,19 +27,19 @@ public class HerokuRedisTest {
 
     @Test
     public void getHostTest() {
-        Whitebox.setInternalState(HerokuRedis.class, "REDIS_HOST", "host");
+        Whitebox.setInternalState(HerokuRedis.class, "HOST", "host");
         assertEquals("host", HerokuRedis.getHost());
     }
 
     @Test
     public void getPasswordTest() {
-        Whitebox.setInternalState(HerokuRedis.class, "REDIS_PASSWORD", "password");
+        Whitebox.setInternalState(HerokuRedis.class, "PASSWORD", "password");
         assertEquals("password", HerokuRedis.getPassword());
     }
 
     @Test
     public void getPort() {
-        Whitebox.setInternalState(HerokuRedis.class, "REDIS_PORT", 6380);
+        Whitebox.setInternalState(HerokuRedis.class, "PORT", 6380);
         assertEquals(6380, HerokuRedis.getPort());
     }
 }
