@@ -33,7 +33,9 @@ final class RedisUrlParser {
 
         if (parsedUri.getUserInfo() != null) {
             final String[] userInfo = parsedUri.getUserInfo().split(":", 2);
-            result.password = userInfo[1];
+            if (userInfo.length >= 2) {
+                result.password = userInfo[1];
+            }
         }
 
         return result;
