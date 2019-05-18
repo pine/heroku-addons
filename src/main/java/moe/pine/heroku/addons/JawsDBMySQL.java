@@ -83,6 +83,10 @@ public final class JawsDBMySQL {
         return PASSWORD;
     }
 
+    public static String getDatabase() {
+        return DATABASE;
+    }
+
     public static int getPort() {
         return PORT;
     }
