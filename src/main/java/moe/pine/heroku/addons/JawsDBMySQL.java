@@ -1,24 +1,25 @@
 package moe.pine.heroku.addons;
 
-
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public final class HerokuRedis {
+public final class JawsDBMySQL {
     private static boolean DETECTED;
     private static String HOST;
+    private static String USERNAME;
     private static String PASSWORD;
+    private static String DATABASE;
     private static int PORT;
 
     static final class Parser {
         @SuppressWarnings("Duplicates")
-        ParserResult parse(final String redisUrl) {
-            if (redisUrl == null) return null;
-            if (redisUrl.isEmpty()) return null;
+        ParserResult parse(final String jawsDbUrl) {
+            if (jawsDbUrl == null) return null;
+            if (jawsDbUrl.isEmpty()) return null;
 
             final URI parsedUri;
             try {
-                parsedUri = new URI(redisUrl);
+                parsedUri = new URI(jawsDbUrl);
             } catch (URISyntaxException e) {
                 return null;
             }
@@ -28,7 +29,13 @@ public final class HerokuRedis {
             parserResult.port = parsedUri.getPort();
 
             if (parsedUri.getUserInfo() != null) {
-                parserResult.password = parsedUri.getUserInfo().split(":", 2)[1];
+                final String[] userInfo = parsedUri.getUserInfo().split(":", 2);
+                parserResult.username = userInfo[0];
+                parserResult.password = userInfo[1];
+            }
+
+            if (parsedUri.getPath() != null) {
+                parserResult.database = parsedUri.getPath().substring(1);
             }
 
             return parserResult;
@@ -37,23 +44,27 @@ public final class HerokuRedis {
 
     static final class ParserResult {
         String host;
+        String username;
         String password;
+        String database;
         int port;
     }
 
     static {
-        final String redisUrl = System.getenv("REDIS_URL");
+        final String redisUrl = System.getenv("JAWSDB_URL");
         final Parser parser = new Parser();
         final ParserResult parserResult = parser.parse(redisUrl);
         if (parserResult != null) {
             DETECTED = true;
             HOST = parserResult.host;
+            USERNAME = parserResult.username;
             PASSWORD = parserResult.password;
+            DATABASE = parserResult.database;
             PORT = parserResult.port;
         }
     }
 
-    private HerokuRedis() {
+    private JawsDBMySQL() {
     }
 
     public static boolean isDetected() {
@@ -62,6 +73,10 @@ public final class HerokuRedis {
 
     public static String getHost() {
         return HOST;
+    }
+
+    public static String getUsername() {
+        return USERNAME;
     }
 
     public static String getPassword() {
