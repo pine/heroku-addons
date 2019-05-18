@@ -26,7 +26,6 @@ final class MySQLUrlParser {
         try {
             parsedUri = new URI(mysqlUrl);
         } catch (URISyntaxException e) {
-            e.printStackTrace();
             return null;
         }
 
@@ -36,8 +35,12 @@ final class MySQLUrlParser {
 
         if (parsedUri.getUserInfo() != null) {
             final String[] userInfo = parsedUri.getUserInfo().split(":", 2);
-            result.username = userInfo[0];
-            result.password = userInfo[1];
+            if (userInfo.length > 0) {
+                result.username = userInfo[0];
+                if (userInfo.length > 1) {
+                    result.password = userInfo[1];
+                }
+            }
         }
 
         if (parsedUri.getPath() != null) {
