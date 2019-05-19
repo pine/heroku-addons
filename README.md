@@ -14,7 +14,7 @@ repositories {
 }
 
 depepdencies {
-    implementation 'moe.pine:heroku-addons:0.1.0'
+    implementation 'moe.pine:heroku-addons:0.2.1'
 }
 ```
 
