@@ -10,7 +10,7 @@ The library is published to [Bintray](https://bintray.com/pinemz/maven/heroku-ad
 
 ```gradle
 repositories {
-    maven { url 'https://dl.bintray.com/pinemz/maven/' }
+    jcenter()
 }
 
 depepdencies {
