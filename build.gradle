@@ -15,6 +15,7 @@ buildscript {
         classpath 'net.rdrei.android.buildtimetracker:gradle-plugin:0.11.0'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.11'
     }
 }
 
@@ -83,6 +84,24 @@ jacocoTestReport {
         xml.enabled = true
         html.enabled = true
     }
+}
+
+
+// ----- SpotBugs -------------------------------------
+
+apply plugin: 'com.github.spotbugs'
+
+spotbugs {
+	toolVersion = '3.1.8'
+	excludeFilter = file("${project.rootDir}/findbugs-exclude.xml")
+	spotbugsTest.enabled = false
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
 }
 
 
