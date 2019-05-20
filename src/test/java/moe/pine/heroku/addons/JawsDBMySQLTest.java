@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.powermock.reflect.Whitebox;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -16,6 +17,9 @@ class JawsDBMySQLTest {
         final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
         Whitebox.setInternalState(JawsDBMySQL.class, "INSTANCE", jawsDBMySQL);
         assertSame(jawsDBMySQL, JawsDBMySQL.get());
+
+        Whitebox.setInternalState(JawsDBMySQL.class, "INSTANCE", (JawsDBMySQL) null);
+        assertNull(JawsDBMySQL.get());
     }
 
     @Test

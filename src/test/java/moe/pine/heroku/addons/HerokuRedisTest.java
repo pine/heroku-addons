@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.powermock.reflect.Whitebox;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -16,6 +17,9 @@ class HerokuRedisTest {
         final HerokuRedis herokuRedis = new HerokuRedis(result);
         Whitebox.setInternalState(HerokuRedis.class, "INSTANCE", herokuRedis);
         assertSame(herokuRedis, HerokuRedis.get());
+
+        Whitebox.setInternalState(HerokuRedis.class, "INSTANCE", (HerokuRedis) null);
+        assertNull(HerokuRedis.get());
     }
 
     @Test
