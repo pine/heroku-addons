@@ -11,6 +11,8 @@ class JawsDBMySQLTest {
     @Test
     void getTest() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        result.host = "host";
+
         final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
         Whitebox.setInternalState(JawsDBMySQL.class, "INSTANCE", jawsDBMySQL);
         assertSame(jawsDBMySQL, JawsDBMySQL.get());
@@ -37,6 +39,8 @@ class JawsDBMySQLTest {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     void getUsernameTest_illegalState() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        result.host = "host";
+
         final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
         assertThrows(IllegalStateException.class, jawsDBMySQL::getUsername);
     }
@@ -45,6 +49,8 @@ class JawsDBMySQLTest {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     void getPasswordTest_illegalState() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        result.host = "host";
+
         final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
         assertThrows(IllegalStateException.class, jawsDBMySQL::getPassword);
     }
@@ -53,6 +59,8 @@ class JawsDBMySQLTest {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     void getDatabaseTest_illegalState() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        result.host = "host";
+
         final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
         assertThrows(IllegalStateException.class, jawsDBMySQL::getDatabase);
     }

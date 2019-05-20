@@ -2,6 +2,7 @@ package moe.pine.heroku.addons;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public final class HerokuRedis {
     private static final HerokuRedis INSTANCE;
@@ -21,7 +22,7 @@ public final class HerokuRedis {
     }
 
     HerokuRedis(RedisUrlParser.Result result) {
-        host = result.host;
+        host = Objects.requireNonNull(result.host);
         password = result.password;
         port = result.port;
     }

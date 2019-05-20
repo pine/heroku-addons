@@ -2,6 +2,7 @@ package moe.pine.heroku.addons;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public final class JawsDBMySQL {
     private static final JawsDBMySQL INSTANCE;
@@ -23,7 +24,7 @@ public final class JawsDBMySQL {
     }
 
     JawsDBMySQL(final MySQLUrlParser.Result result) {
-        host = result.host;
+        host = Objects.requireNonNull(result.host);
         username = result.username;
         password = result.password;
         database = result.database;

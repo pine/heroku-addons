@@ -11,6 +11,8 @@ class HerokuRedisTest {
     @Test
     void getTest() {
         final RedisUrlParser.Result result = new RedisUrlParser.Result();
+        result.host = "host";
+
         final HerokuRedis herokuRedis = new HerokuRedis(result);
         Whitebox.setInternalState(HerokuRedis.class, "INSTANCE", herokuRedis);
         assertSame(herokuRedis, HerokuRedis.get());
@@ -33,6 +35,8 @@ class HerokuRedisTest {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     void getPasswordTest_illegalState() {
         final RedisUrlParser.Result result = new RedisUrlParser.Result();
+        result.host = "host";
+
         final HerokuRedis herokuRedis = new HerokuRedis(result);
         assertThrows(IllegalStateException.class, herokuRedis::getPassword);
     }
