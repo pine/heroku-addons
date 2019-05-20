@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public final class JawsDBMySQL {
-    private static JawsDBMySQL INSTANCE;
+    private static final JawsDBMySQL INSTANCE;
 
     private final String host;
     private final String username;
@@ -17,6 +17,8 @@ public final class JawsDBMySQL {
         final MySQLUrlParser.Result result = MySQLUrlParser.parse(redisUrl);
         if (result != null) {
             INSTANCE = new JawsDBMySQL(result);
+        } else {
+            INSTANCE = null;
         }
     }
 

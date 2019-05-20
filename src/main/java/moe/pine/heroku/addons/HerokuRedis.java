@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public final class HerokuRedis {
-    private static HerokuRedis INSTANCE;
+    private static final HerokuRedis INSTANCE;
 
     private final String host;
     private final String password;
@@ -15,6 +15,8 @@ public final class HerokuRedis {
         final RedisUrlParser.Result result = RedisUrlParser.parse(redisUrl);
         if (result != null) {
             INSTANCE = new HerokuRedis(result);
+        } else {
+            INSTANCE = null;
         }
     }
 
