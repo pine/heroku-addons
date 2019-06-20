@@ -5,6 +5,11 @@
 
 > :mag: Heroku add-ons utilities.
 
+![](images/resized.jpg)<br>
+<sup><sup>&copy; Leung Cho Pan/123RF.COM</sup></sup>
+<br>
+<br>
+
 ## Getting started
 The library is published to [Bintray](https://bintray.com/pinemz/maven/heroku-addons).
 
