@@ -1,14 +1,15 @@
 package moe.pine.heroku.addons;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.util.Objects;
 
 public final class HerokuRedis {
-    private static final HerokuRedis INSTANCE;
+    private static final @Nullable HerokuRedis INSTANCE;
 
-    private final String host;
-    private final String password;
+    private final @NonNull String host;
+    private final @Nullable String password;
     private final int port;
 
     static {
@@ -27,18 +28,17 @@ public final class HerokuRedis {
         port = result.port;
     }
 
-    @Nullable
-    public static HerokuRedis get() {
+
+    public static @Nullable HerokuRedis get() {
         return INSTANCE;
     }
 
-    @Nonnull
-    public String getHost() {
+
+    public @NonNull String getHost() {
         return host;
     }
 
-    @Nonnull
-    public String getPassword() {
+    public @NonNull String getPassword() {
         if (password == null) {
             throw new IllegalStateException("Heroku Redis should have `password`, but not.");
         }

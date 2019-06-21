@@ -1,24 +1,24 @@
 package moe.pine.heroku.addons;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
 final class MySQLUrlParser {
     static final class Result {
-        String host;
-        String username;
-        String password;
-        String database;
+        @Nullable String host;
+        @Nullable String username;
+        @Nullable String password;
+        @Nullable String database;
         int port;
     }
 
     private MySQLUrlParser() {
     }
 
-    @Nullable
     @SuppressWarnings("Duplicates")
-    static Result parse(@Nullable final String mysqlUrl) {
+    static @Nullable Result parse(final @Nullable String mysqlUrl) {
         if (mysqlUrl == null) return null;
         if (mysqlUrl.isEmpty()) return null;
 

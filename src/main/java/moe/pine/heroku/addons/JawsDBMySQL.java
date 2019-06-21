@@ -1,16 +1,17 @@
 package moe.pine.heroku.addons;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.util.Objects;
 
 public final class JawsDBMySQL {
-    private static final JawsDBMySQL INSTANCE;
+    private static final @Nullable JawsDBMySQL INSTANCE;
 
-    private final String host;
-    private final String username;
-    private final String password;
-    private final String database;
+    private final @NonNull String host;
+    private final @Nullable String username;
+    private final @Nullable String password;
+    private final @Nullable String database;
     private final int port;
 
     static {
@@ -31,34 +32,29 @@ public final class JawsDBMySQL {
         port = result.port;
     }
 
-    @Nullable
-    public static JawsDBMySQL get() {
+    public static @Nullable JawsDBMySQL get() {
         return INSTANCE;
     }
 
-    @Nonnull
-    public String getHost() {
+    public @NonNull String getHost() {
         return host;
     }
 
-    @Nonnull
-    public String getUsername() {
+    public @NonNull String getUsername() {
         if (username == null) {
             throw new IllegalStateException("JawsDB MySQL should have `username`. but not.");
         }
         return username;
     }
 
-    @Nonnull
-    public String getPassword() {
+    public @NonNull String getPassword() {
         if (password == null) {
             throw new IllegalStateException("JawsDB MySQL should have `password`, but not.");
         }
         return password;
     }
 
-    @Nonnull
-    public String getDatabase() {
+    public @NonNull String getDatabase() {
         if (database == null) {
             throw new IllegalStateException("JawsDB MySQL should have `database`, but not.");
         }

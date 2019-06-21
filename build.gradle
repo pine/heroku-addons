@@ -16,6 +16,7 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         classpath 'gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.11'
+        classpath 'org.checkerframework:checkerframework-gradle-plugin:0.3.4'
     }
 }
 
@@ -43,7 +44,6 @@ compileJava {
 }
 
 dependencies {
-    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
     testImplementation 'org.powermock:powermock-reflect:2.0.2'
@@ -102,6 +102,18 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 		xml.enabled = false
 		html.enabled = true
 	}
+}
+
+
+// ----- Checker Framework ----------------------------
+
+apply plugin: 'org.checkerframework'
+checkerFramework {
+    excludeTests = true
+    checkers = [
+            'org.checkerframework.checker.nullness.NullnessChecker',
+            'org.checkerframework.checker.units.UnitsChecker'
+    ]
 }
 
 

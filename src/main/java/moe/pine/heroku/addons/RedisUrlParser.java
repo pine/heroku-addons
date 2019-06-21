@@ -1,22 +1,22 @@
 package moe.pine.heroku.addons;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
 final class RedisUrlParser {
     static final class Result {
-        String host;
-        String password;
+        @Nullable String host;
+        @Nullable String password;
         int port;
     }
 
     private RedisUrlParser() {
     }
 
-    @Nullable
     @SuppressWarnings("Duplicates")
-    static Result parse(@Nullable final String redisUrl) {
+    static @Nullable Result parse(final @Nullable String redisUrl) {
         if (redisUrl == null) return null;
         if (redisUrl.isEmpty()) return null;
 
