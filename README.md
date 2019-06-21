@@ -30,6 +30,7 @@ Don' you find what you need? We look forward to your contribution :smile:
 - [JawsDB MySQL](https://elements.heroku.com/addons/jawsdb)
 
 ## Usage
+If you want to use [Heroku Redis](https://elements.heroku.com/addons/heroku-redis) add-on, please use the code as following.
 
 ```java
 import moe.pine.heroku.addons.HerokuRedis;
