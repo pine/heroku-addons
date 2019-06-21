@@ -92,16 +92,16 @@ jacocoTestReport {
 apply plugin: 'com.github.spotbugs'
 
 spotbugs {
-	toolVersion = '3.1.8'
-	excludeFilter = file("${project.rootDir}/findbugs-exclude.xml")
-	spotbugsTest.enabled = false
+    toolVersion = '3.1.8'
+    excludeFilter = file("${project.rootDir}/findbugs-exclude.xml")
+    spotbugsTest.enabled = false
 }
 
 tasks.withType(com.github.spotbugs.SpotBugsTask) {
-	reports {
-		xml.enabled = false
-		html.enabled = true
-	}
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
 }
 
 
@@ -110,10 +110,13 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 apply plugin: 'org.checkerframework'
 checkerFramework {
     excludeTests = true
-    checkers = [
-            'org.checkerframework.checker.nullness.NullnessChecker',
-            'org.checkerframework.checker.units.UnitsChecker'
-    ]
+
+    if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
+        checkers = [
+                'org.checkerframework.checker.nullness.NullnessChecker',
+                'org.checkerframework.checker.units.UnitsChecker'
+        ]
+    }
 }
 
 
