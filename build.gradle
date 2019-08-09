@@ -6,6 +6,9 @@ buildscript {
         siteUrl = 'https://github.com/pine/heroku-addons'
         gitUrl = 'https://github.com/pine/heroku-addons.git'
         userOrg = 'pinemz'
+
+        junitVersion = '5.4.2'
+        powermockVersion = '2.0.2'
     }
     repositories {
         jcenter()
@@ -44,10 +47,9 @@ compileJava {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
-    testImplementation 'org.powermock:powermock-reflect:2.0.2'
-
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.powermock:powermock-reflect:$powermockVersion"
 }
 
 test {
