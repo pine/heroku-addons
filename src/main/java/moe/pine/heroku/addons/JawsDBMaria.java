@@ -5,6 +5,11 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Connection information to JawsDB Maria
+ *
+ * @see <a href="https://elements.heroku.com/addons/jawsdb-maria">JawsDB Maria - Add-ons - Heroku Elements</a>
+ */
 public final class JawsDBMaria {
     private static final @Nullable JawsDBMaria INSTANCE;
 
