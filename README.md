@@ -10,6 +10,11 @@
 <br>
 <br>
 
+## Requirements
+
+- Java 8 or later
+  - Android Java has not been supported, because the add-on is for server apps on Heroku
+
 ## Getting started
 The library is published to [Bintray](https://bintray.com/pinemz/maven/heroku-addons).
 
