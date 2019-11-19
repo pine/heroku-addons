@@ -9,6 +9,7 @@ import java.util.Objects;
  * Connection information to JawsDB Maria
  *
  * @see <a href="https://elements.heroku.com/addons/jawsdb-maria">JawsDB Maria - Add-ons - Heroku Elements</a>
+ * @see <a href="https://devcenter.heroku.com/articles/jawsdb-maria">JawsDB Maria | Heroku Dev Center</a>
  */
 public final class JawsDBMaria {
     private final @NonNull String host;
