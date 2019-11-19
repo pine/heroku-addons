@@ -11,13 +11,13 @@ import java.util.Objects;
  * @see <a href="https://elements.heroku.com/addons/jawsdb-maria">JawsDB Maria - Add-ons - Heroku Elements</a>
  */
 public final class JawsDBMaria {
-    private static final @Nullable JawsDBMaria INSTANCE;
-
     private final @NonNull String host;
     private final @Nullable String username;
     private final @Nullable String password;
     private final @Nullable String database;
     private final int port;
+
+    private static final @Nullable JawsDBMaria INSTANCE;
 
     static {
         final String mariaUrl = System.getenv("JAWSDB_MARIA_URL");
