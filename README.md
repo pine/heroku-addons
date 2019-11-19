@@ -33,6 +33,7 @@ Don' you find what you need? We look forward to your contribution :smile:
 
 - [Heroku Redis](https://elements.heroku.com/addons/heroku-redis)
 - [JawsDB MySQL](https://elements.heroku.com/addons/jawsdb)
+- [JawsDB Maria](https://elements.heroku.com/addons/jawsdb-maria)
 
 ## Usage
 If you want to use [Heroku Redis](https://elements.heroku.com/addons/heroku-redis) add-on, please use the code as following.
