@@ -17,6 +17,7 @@
 
 ## Getting started
 The library is published to [Bintray](https://bintray.com/pinemz/maven/heroku-addons).
+Please replace `$latest_version` below with [![Download](https://api.bintray.com/packages/pinemz/maven/heroku-addons/images/download.svg) ](https://bintray.com/pinemz/maven/heroku-addons/_latestVersion).
 
 ```gradle
 repositories {
@@ -24,7 +25,7 @@ repositories {
 }
 
 depepdencies {
-    implementation 'moe.pine:heroku-addons:0.2.2'
+    implementation "moe.pine:heroku-addons:$latest_version"
 }
 ```
 
