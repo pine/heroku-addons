@@ -28,7 +28,6 @@ public final class HerokuRedis {
         port = result.port;
     }
 
-
     public static @Nullable HerokuRedis get() {
         return INSTANCE;
     }
@@ -47,5 +46,27 @@ public final class HerokuRedis {
 
     public int getPort() {
         return port;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final HerokuRedis that = (HerokuRedis) o;
+        return port == that.port && host.equals(that.host) && Objects.equals(password, that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(host, password, port);
+    }
+
+    @Override
+    public String toString() {
+        return "HerokuRedis{" +
+                "host='" + host + '\'' +
+                ", password='" + password + '\'' +
+                ", port=" + port +
+                '}';
     }
 }
