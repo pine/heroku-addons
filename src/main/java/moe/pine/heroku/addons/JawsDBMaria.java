@@ -18,15 +18,20 @@ public final class JawsDBMaria {
     private final @Nullable String database;
     private final int port;
 
-    private static final @Nullable JawsDBMaria INSTANCE;
+    static final class Holder {
+        private static final @Nullable JawsDBMaria INSTANCE;
 
-    static {
-        final String mariaUrl = System.getenv("JAWSDB_MARIA_URL");
-        final MySQLUrlParser.Result result = MySQLUrlParser.parse(mariaUrl);
-        if (result != null) {
-            INSTANCE = new JawsDBMaria(result);
-        } else {
-            INSTANCE = null;
+        private Holder() {
+        }
+
+        static {
+            final String mariaUrl = System.getenv("JAWSDB_MARIA_URL");
+            final MySQLUrlParser.Result result = MySQLUrlParser.parse(mariaUrl);
+            if (result != null) {
+                INSTANCE = new JawsDBMaria(result);
+            } else {
+                INSTANCE = null;
+            }
         }
     }
 
@@ -39,7 +44,7 @@ public final class JawsDBMaria {
     }
 
     public static @Nullable JawsDBMaria get() {
-        return INSTANCE;
+        return Holder.INSTANCE;
     }
 
     public @NonNull String getHost() {

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings({"ResultOfMethodCallIgnored", "OverlyStrongTypeCast"})
 class JawsDBMariaTest {
     @Test
     void getTest() {
@@ -15,10 +16,12 @@ class JawsDBMariaTest {
         result.host = "host";
 
         final JawsDBMaria jawsDBMaria = new JawsDBMaria(result);
-        Whitebox.setInternalState(JawsDBMaria.class, "INSTANCE", jawsDBMaria);
+        JawsDBMaria.get(); // Pre-load `Holder` class
+
+        Whitebox.setInternalState(JawsDBMaria.Holder.class, "INSTANCE", jawsDBMaria);
         assertSame(jawsDBMaria, JawsDBMaria.get());
 
-        Whitebox.setInternalState(JawsDBMaria.class, "INSTANCE", (JawsDBMaria) null);
+        Whitebox.setInternalState(JawsDBMaria.Holder.class, "INSTANCE", (JawsDBMaria) null);
         assertNull(JawsDBMaria.get());
     }
 
@@ -40,7 +43,6 @@ class JawsDBMariaTest {
     }
 
     @Test
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     void getUsernameTest_illegalState() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
@@ -50,7 +52,6 @@ class JawsDBMariaTest {
     }
 
     @Test
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     void getPasswordTest_illegalState() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
@@ -60,7 +61,6 @@ class JawsDBMariaTest {
     }
 
     @Test
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     void getDatabaseTest_illegalState() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
