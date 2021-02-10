@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.powermock.reflect.Whitebox;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -45,5 +46,47 @@ class HerokuRedisTest {
 
         final HerokuRedis herokuRedis = new HerokuRedis(result);
         assertThrows(IllegalStateException.class, herokuRedis::getPassword);
+    }
+
+    @Test
+    void equalsTest_equals() {
+        RedisUrlParser.Result result1 = new RedisUrlParser.Result();
+        result1.host = "host";
+        result1.password = "password";
+        result1.port = 6380;
+
+        RedisUrlParser.Result result2 = new RedisUrlParser.Result();
+        result2.host = "host";
+        result2.password = "password";
+        result2.port = 6380;
+
+        assertEquals(new HerokuRedis(result1), new HerokuRedis(result1));
+        assertEquals(new HerokuRedis(result1), new HerokuRedis(result2));
+    }
+
+    @Test
+    void equalsTest_notEquals() {
+        RedisUrlParser.Result result1 = new RedisUrlParser.Result();
+        result1.host = "host";
+        result1.password = "password";
+        result1.port = 6380;
+
+        RedisUrlParser.Result result2 = new RedisUrlParser.Result();
+        result2.host = "host";
+        result2.password = "password";
+        result2.port = 6381;
+
+        assertNotEquals(new HerokuRedis(result1), new HerokuRedis(result2));
+    }
+
+    @Test
+    void toStringTest() {
+        RedisUrlParser.Result result = new RedisUrlParser.Result();
+        result.host = "host";
+        result.password = "password";
+        result.port = 6380;
+
+        HerokuRedis redis = new HerokuRedis(result);
+        assertEquals("HerokuRedis{host='host', password='password', port=6380}", redis.toString());
     }
 }
