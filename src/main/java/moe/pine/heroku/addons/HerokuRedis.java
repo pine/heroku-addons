@@ -6,19 +6,24 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.Objects;
 
 public final class HerokuRedis {
-    private static final @Nullable HerokuRedis INSTANCE;
-
     private final @NonNull String host;
     private final @Nullable String password;
     private final int port;
 
-    static {
-        final String redisUrl = System.getenv("REDIS_URL");
-        final RedisUrlParser.Result result = RedisUrlParser.parse(redisUrl);
-        if (result != null) {
-            INSTANCE = new HerokuRedis(result);
-        } else {
-            INSTANCE = null;
+    static final class Holder {
+        private static final @Nullable HerokuRedis INSTANCE;
+
+        private Holder() {
+        }
+
+        static {
+            final String redisUrl = System.getenv("REDIS_URL");
+            final RedisUrlParser.Result result = RedisUrlParser.parse(redisUrl);
+            if (result != null) {
+                INSTANCE = new HerokuRedis(result);
+            } else {
+                INSTANCE = null;
+            }
         }
     }
 
@@ -29,9 +34,8 @@ public final class HerokuRedis {
     }
 
     public static @Nullable HerokuRedis get() {
-        return INSTANCE;
+        return Holder.INSTANCE;
     }
-
 
     public @NonNull String getHost() {
         return host;

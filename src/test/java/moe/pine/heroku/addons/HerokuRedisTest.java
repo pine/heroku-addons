@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings({"ResultOfMethodCallIgnored", "OverlyStrongTypeCast"})
 class HerokuRedisTest {
     @Test
     void getTest() {
@@ -15,10 +16,12 @@ class HerokuRedisTest {
         result.host = "host";
 
         final HerokuRedis herokuRedis = new HerokuRedis(result);
-        Whitebox.setInternalState(HerokuRedis.class, "INSTANCE", herokuRedis);
+        HerokuRedis.get(); // Pre-load `Holder` class
+
+        Whitebox.setInternalState(HerokuRedis.Holder.class, "INSTANCE", herokuRedis);
         assertSame(herokuRedis, HerokuRedis.get());
 
-        Whitebox.setInternalState(HerokuRedis.class, "INSTANCE", (HerokuRedis) null);
+        Whitebox.setInternalState(HerokuRedis.Holder.class, "INSTANCE", (HerokuRedis) null);
         assertNull(HerokuRedis.get());
     }
 
