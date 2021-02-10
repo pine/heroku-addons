@@ -70,4 +70,28 @@ public final class JawsDBMaria {
     public int getPort() {
         return port;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final JawsDBMaria that = (JawsDBMaria) o;
+        return port == that.port && host.equals(that.host) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(database, that.database);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(host, username, password, database, port);
+    }
+
+    @Override
+    public String toString() {
+        return "JawsDBMaria{" +
+                "host='" + host + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", database='" + database + '\'' +
+                ", port=" + port +
+                '}';
+    }
 }
