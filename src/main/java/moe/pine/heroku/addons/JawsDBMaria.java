@@ -72,7 +72,7 @@ public final class JawsDBMaria {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final JawsDBMaria that = (JawsDBMaria) o;
