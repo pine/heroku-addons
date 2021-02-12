@@ -12,21 +12,21 @@ publishing {
                 url = rootProject.ext.websiteUrl
                 licenses {
                     license {
-                        name 'MIT License'
-                        url 'http://opensource.org/licenses/mit-license.php'
+                        name = 'MIT License'
+                        url = 'http://opensource.org/licenses/mit-license.php'
                     }
                 }
                 developers {
                     developer {
-                        id 'pine'
-                        name 'Pine Mizune'
-                        email 'pinemz@gmail.com'
+                        id = 'pine'
+                        name = 'Pine Mizune'
+                        email = 'pinemz@gmail.com'
                     }
                 }
                 scm {
-                    connection rootProject.ext.gitUrl
-                    developerConnection rootProject.ext.gitUrl
-                    url rootProject.ext.websiteUrl
+                    connection = rootProject.ext.gitUrl
+                    developerConnection = rootProject.ext.gitUrl
+                    url = rootProject.ext.websiteUrl
                 }
             }
         }
@@ -37,13 +37,14 @@ publishing {
             def snapshotsRepoUrl = 'https://oss.sonatype.org/content/repositories/snapshots'
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
-                username = "${sonatypeUsername}"
-                password = "${sonatypePassword}"
+                username = project.hasProperty('sonatypeUsername') ? project.property('sonatypeUsername') : ''
+                password = project.hasProperty('sonatypePassword') ? project.property('sonatypePassword') : ''
             }
         }
     }
 }
 
 signing {
+    useGpgCmd()
     sign publishing.publications.mavenJava
 }
