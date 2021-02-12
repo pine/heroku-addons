@@ -80,6 +80,37 @@ class HerokuRedisTest {
     }
 
     @Test
+    void hashCodeTest_equals() {
+        RedisUrlParser.Result result1 = new RedisUrlParser.Result();
+        result1.host = "host";
+        result1.password = "password";
+        result1.port = 6380;
+
+        RedisUrlParser.Result result2 = new RedisUrlParser.Result();
+        result2.host = "host";
+        result2.password = "password";
+        result2.port = 6380;
+
+        assertEquals(new HerokuRedis(result1).hashCode(), new HerokuRedis(result1).hashCode());
+        assertEquals(new HerokuRedis(result1).hashCode(), new HerokuRedis(result2).hashCode());
+    }
+
+    @Test
+    void hashCodeTest_notEquals() {
+        RedisUrlParser.Result result1 = new RedisUrlParser.Result();
+        result1.host = "host";
+        result1.password = "password";
+        result1.port = 6380;
+
+        RedisUrlParser.Result result2 = new RedisUrlParser.Result();
+        result2.host = "host";
+        result2.password = "password";
+        result2.port = 6381;
+
+        assertNotEquals(new HerokuRedis(result1).hashCode(), new HerokuRedis(result2).hashCode());
+    }
+
+    @Test
     void toStringTest() {
         RedisUrlParser.Result result = new RedisUrlParser.Result();
         result.host = "host";
