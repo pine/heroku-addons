@@ -28,6 +28,11 @@ depepdencies {
 }
 ```
 
+### Notes on the old versions
+The old versions `< 0.3.2` had been published to jcenter, but jcenter is scheduled to end.
+
+Please use the newer versions  that  are published to Maven Central.
+
 ## Supported add-ons
 Don' you find what you need? We look forward to your contribution :smile:
 
