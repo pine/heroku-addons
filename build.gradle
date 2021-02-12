@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        version = '0.3.1'
+        version = '0.3.2'
         description = 'Heroku add-ons utilities.'
         group = 'moe.pine'
         websiteUrl = 'https://github.com/pine/heroku-addons'
@@ -34,11 +34,22 @@ version rootProject.ext.version
 description rootProject.ext.description
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
 
 compileJava {
     options.encoding = 'UTF-8'
@@ -122,6 +133,6 @@ checkerFramework {
 }
 
 
-// ----- Bintray ------------------------------------------
+// ----- Publish --------------------------------------
 
-apply from: "${rootProject.projectDir}/gradle/bintray.gradle"
+apply from: "${rootProject.projectDir}/gradle/sonatype.gradle"
