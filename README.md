@@ -16,12 +16,11 @@
   - Android Java has not been supported, because the add-on is for server apps on Heroku
 
 ## Getting started
-The library is published to [Bintray](https://bintray.com/pinemz/maven/heroku-addons).
-Please replace `$latest_version` below with [![Download](https://api.bintray.com/packages/pinemz/maven/heroku-addons/images/download.svg) ](https://bintray.com/pinemz/maven/heroku-addons/_latestVersion).
+The library is published to [Maven Central](https://search.maven.org/). Please replace `$latest_version` below with the actual version.
 
 ```gradle
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 depepdencies {
@@ -57,12 +56,10 @@ if (redis != null) {
 $ ./gradlew clean test
 ```
 
-### Upload Bintray
+### Upload Maven Central
 
 ```
-$ export BINTRAY_USER=username
-$ export BINTRAY_KEY=apiKey
-$ ./gradlew clean assemble bintrayUpload
+$ ./gradlew clean publish
 ```
 
 
