@@ -29,7 +29,7 @@ depepdencies {
 ```
 
 ### Notes on the old versions
-The old versions `< 0.3.2` had been published to jcenter, but jcenter is scheduled to end.
+The old versions `< 0.3.2` had been published to jcenter, but jcenter is [scheduled to end](https://jfrog.com/blog/into-the-sunset-bintray-jcenter-gocenter-and-chartcenter/).
 
 Please use the newer versions  that  are published to Maven Central.
 
