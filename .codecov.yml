@@ -1,4 +1,6 @@
 coverage:
   status:
-    project: off
+    project:
+      default:
+        if_ci_failed: success
     patch: off
