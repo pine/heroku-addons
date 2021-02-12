@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.powermock.reflect.Whitebox;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -67,5 +68,44 @@ class JawsDBMariaTest {
 
         final JawsDBMaria jawsDBMaria = new JawsDBMaria(result);
         assertThrows(IllegalStateException.class, jawsDBMaria::getDatabase);
+    }
+
+    @Test
+    void equalsTest_equals() {
+        MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
+        result1.host = "host";
+        result1.username = "username";
+        result1.password = "password";
+        result1.port = 3306;
+        result1.database = "database";
+
+        MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
+        result2.host = "host";
+        result2.username = "username";
+        result2.password = "password";
+        result2.port = 3306;
+        result2.database = "database";
+
+        assertEquals(new JawsDBMaria(result1), new JawsDBMaria(result1));
+        assertEquals(new JawsDBMaria(result1), new JawsDBMaria(result2));
+    }
+
+    @Test
+    void equalsTest_notEquals() {
+        MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
+        result1.host = "host";
+        result1.username = "username";
+        result1.password = "password";
+        result1.port = 3306;
+        result1.database = "database";
+
+        MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
+        result2.host = "host";
+        result2.username = "username";
+        result2.password = "password";
+        result2.port = 3307;
+        result2.database = "database";
+
+        assertNotEquals(new JawsDBMaria(result1), new JawsDBMaria(result2));
     }
 }
