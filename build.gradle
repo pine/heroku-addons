@@ -12,7 +12,7 @@ buildscript {
         powermockVersion = '2.0.5'
     }
     repositories {
-        jcenter()
+        mavenCentral()
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
