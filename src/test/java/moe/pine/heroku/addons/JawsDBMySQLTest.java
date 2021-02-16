@@ -19,11 +19,13 @@ class JawsDBMySQLTest {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
 
+        JawsDBMySQL.get(); // Pre-load `Holder` class
+
         final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
-        Whitebox.setInternalState(JawsDBMySQL.class, "INSTANCE", jawsDBMySQL);
+        Whitebox.setInternalState(JawsDBMySQL.Holder.class, "INSTANCE", jawsDBMySQL);
         assertSame(jawsDBMySQL, JawsDBMySQL.get());
 
-        Whitebox.setInternalState(JawsDBMySQL.class, "INSTANCE", (JawsDBMySQL) null);
+        Whitebox.setInternalState(JawsDBMySQL.Holder.class, "INSTANCE", (JawsDBMySQL) null);
         assertNull(JawsDBMySQL.get());
     }
 

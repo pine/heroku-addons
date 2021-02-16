@@ -6,25 +6,27 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.Objects;
 
 public final class JawsDBMySQL {
-    private static final @Nullable JawsDBMySQL INSTANCE;
-
     private final @NonNull String host;
     private final @Nullable String username;
     private final @Nullable String password;
     private final @Nullable String database;
     private final int port;
 
-    static {
-        final String redisUrl = System.getenv("JAWSDB_URL");
-        final MySQLUrlParser.Result result = MySQLUrlParser.parse(redisUrl);
-        if (result != null) {
-            INSTANCE = new JawsDBMySQL(result);
-        } else {
-            INSTANCE = null;
+    static class Holder {
+        private static final @Nullable JawsDBMySQL INSTANCE;
+
+        static {
+            String redisUrl = System.getenv("JAWSDB_URL");
+            MySQLUrlParser.Result result = MySQLUrlParser.parse(redisUrl);
+            if (result != null) {
+                INSTANCE = new JawsDBMySQL(result);
+            } else {
+                INSTANCE = null;
+            }
         }
     }
 
-    JawsDBMySQL(final MySQLUrlParser.Result result) {
+    JawsDBMySQL(MySQLUrlParser.Result result) {
         host = Objects.requireNonNull(result.host);
         username = result.username;
         password = result.password;
@@ -33,7 +35,7 @@ public final class JawsDBMySQL {
     }
 
     public static @Nullable JawsDBMySQL get() {
-        return INSTANCE;
+        return Holder.INSTANCE;
     }
 
     public @NonNull String getHost() {
