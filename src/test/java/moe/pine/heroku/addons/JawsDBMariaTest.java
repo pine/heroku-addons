@@ -108,4 +108,56 @@ class JawsDBMariaTest {
 
         assertNotEquals(new JawsDBMaria(result1), new JawsDBMaria(result2));
     }
+
+    @Test
+    void hashCodeTest_equals() {
+        MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
+        result1.host = "host";
+        result1.username = "username";
+        result1.password = "password";
+        result1.port = 3306;
+        result1.database = "database";
+
+        MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
+        result2.host = "host";
+        result2.username = "username";
+        result2.password = "password";
+        result2.port = 3306;
+        result2.database = "database";
+
+        assertEquals(new JawsDBMaria(result1).hashCode(), new JawsDBMaria(result1).hashCode());
+        assertEquals(new JawsDBMaria(result1).hashCode(), new JawsDBMaria(result2).hashCode());
+    }
+
+    @Test
+    void hashCodeTest_notEquals() {
+        MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
+        result1.host = "host";
+        result1.username = "username";
+        result1.password = "password";
+        result1.port = 3306;
+        result1.database = "database";
+
+        MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
+        result2.host = "host";
+        result2.username = "username";
+        result2.password = "password";
+        result2.port = 3307;
+        result2.database = "database";
+
+        assertNotEquals(new JawsDBMaria(result1).hashCode(), new JawsDBMaria(result2).hashCode());
+    }
+
+    @Test
+    void toStringTest() {
+        MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        result.host = "host";
+        result.username = "username";
+        result.password = "password";
+        result.port = 3306;
+        result.database = "database";
+
+        assertEquals("JawsDBMaria{host='host', username='username', database='database', port=3306}",
+                new JawsDBMaria(result).toString());
+    }
 }

@@ -18,10 +18,10 @@ class JawsDBMySQLTest {
     void getTest() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
-
+        
+        final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
         JawsDBMySQL.get(); // Pre-load `Holder` class
 
-        final JawsDBMySQL jawsDBMySQL = new JawsDBMySQL(result);
         Whitebox.setInternalState(JawsDBMySQL.Holder.class, "INSTANCE", jawsDBMySQL);
         assertSame(jawsDBMySQL, JawsDBMySQL.get());
 
