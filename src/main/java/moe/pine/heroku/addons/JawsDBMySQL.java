@@ -12,8 +12,11 @@ public final class JawsDBMySQL {
     private final @Nullable String database;
     private final int port;
 
-    static class Holder {
+    static final class Holder {
         private static final @Nullable JawsDBMySQL INSTANCE;
+
+        private Holder() {
+        }
 
         static {
             String redisUrl = System.getenv("JAWSDB_URL");
