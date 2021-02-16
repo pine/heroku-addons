@@ -94,7 +94,6 @@ public final class JawsDBMaria {
         return "JawsDBMaria{" +
                 "host='" + host + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", database='" + database + '\'' +
                 ", port=" + port +
                 '}';

@@ -69,7 +69,6 @@ public final class HerokuRedis {
     public String toString() {
         return "HerokuRedis{" +
                 "host='" + host + '\'' +
-                ", password='" + password + '\'' +
                 ", port=" + port +
                 '}';
     }

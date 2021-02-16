@@ -89,8 +89,13 @@ class JawsDBMySQLTest {
         result2.port = 3306;
         result2.database = "database";
 
-        assertEquals(new JawsDBMySQL(result1), new JawsDBMySQL(result1));
-        assertEquals(new JawsDBMySQL(result1), new JawsDBMySQL(result2));
+        JawsDBMySQL mysql1 = new JawsDBMySQL(result1);
+        JawsDBMySQL mysql2 = new JawsDBMySQL(result1);
+        JawsDBMySQL mysql3 = new JawsDBMySQL(result2);
+
+        assertEquals(mysql1, mysql1);
+        assertEquals(mysql1, mysql2);
+        assertEquals(mysql1, mysql3);
     }
 
     @Test

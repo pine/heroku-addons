@@ -118,6 +118,6 @@ class HerokuRedisTest {
         result.port = 6380;
 
         HerokuRedis redis = new HerokuRedis(result);
-        assertEquals("HerokuRedis{host='host', password='password', port=6380}", redis.toString());
+        assertEquals("HerokuRedis{host='host', port=6380}", redis.toString());
     }
 }
