@@ -83,7 +83,6 @@ public final class JawsDBMySQL {
         return "JawsDBMySQL{" +
                 "host='" + host + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", database='" + database + '\'' +
                 ", port=" + port +
                 '}';
