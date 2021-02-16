@@ -1,15 +1,21 @@
 package moe.pine.heroku.addons;
 
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.powermock.reflect.Whitebox;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SuppressWarnings("AssertBetweenInconvertibleTypes")
+@SuppressWarnings({
+        "AssertBetweenInconvertibleTypes",
+        "ResultOfMethodCallIgnored",
+})
 class JawsDBMySQLTest {
     @Test
-    void getTest() {
+    void get() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
 
@@ -22,7 +28,7 @@ class JawsDBMySQLTest {
     }
 
     @Test
-    void constructorTest() {
+    void constructor() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
         result.username = "username";
@@ -39,8 +45,7 @@ class JawsDBMySQLTest {
     }
 
     @Test
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    void getUsernameTest_illegalState() {
+    void getUsername_illegalState() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
 
@@ -49,8 +54,7 @@ class JawsDBMySQLTest {
     }
 
     @Test
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    void getPasswordTest_illegalState() {
+    void getPassword_illegalState() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
 
@@ -59,8 +63,7 @@ class JawsDBMySQLTest {
     }
 
     @Test
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    void getDatabaseTest_illegalState() {
+    void getDatabase_illegalState() {
         final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
 
@@ -68,65 +71,93 @@ class JawsDBMySQLTest {
         assertThrows(IllegalStateException.class, jawsDBMySQL::getDatabase);
     }
 
-    @Nested
-    class Equals {
-        @Test
-        void equals() {
-            MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
-            result1.host = "host";
-            result1.username = "username";
-            result1.password = "password";
-            result1.port = 3306;
-            result1.database = "database";
+    @Test
+    void equals_equals() {
+        MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
+        result1.host = "host";
+        result1.username = "username";
+        result1.password = "password";
+        result1.port = 3306;
+        result1.database = "database";
 
-            MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
-            result2.host = "host";
-            result2.username = "username";
-            result2.password = "password";
-            result2.port = 3306;
-            result2.database = "database";
+        MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
+        result2.host = "host";
+        result2.username = "username";
+        result2.password = "password";
+        result2.port = 3306;
+        result2.database = "database";
 
-            assertEquals(new JawsDBMySQL(result1), new JawsDBMySQL(result1));
-            assertEquals(new JawsDBMySQL(result1), new JawsDBMySQL(result2));
-        }
+        assertEquals(new JawsDBMySQL(result1), new JawsDBMySQL(result1));
+        assertEquals(new JawsDBMySQL(result1), new JawsDBMySQL(result2));
+    }
 
-        @Test
-        void notEquals_fields() {
-            MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
-            result1.host = "host";
-            result1.username = "username";
-            result1.password = "password";
-            result1.port = 3306;
-            result1.database = "database";
+    @Test
+    void equals_notEquals_fields() {
+        MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
+        result1.host = "host";
+        result1.username = "username";
+        result1.password = "password";
+        result1.port = 3306;
+        result1.database = "database";
 
-            MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
-            result2.host = "host";
-            result2.username = "username";
-            result2.password = "password";
-            result2.port = 3307;
-            result2.database = "database";
+        MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
+        result2.host = "host";
+        result2.username = "username";
+        result2.password = "password";
+        result2.port = 3307;
+        result2.database = "database";
 
-            assertNotEquals(new JawsDBMySQL(result1), new JawsDBMySQL(result2));
-        }
+        assertNotEquals(new JawsDBMySQL(result1), new JawsDBMySQL(result2));
+    }
 
-        @Test
-        void notEquals_class() {
-            MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
-            result1.host = "host";
-            result1.username = "username";
-            result1.password = "password";
-            result1.port = 3306;
-            result1.database = "database";
+    @Test
+    void equals_notEquals_class() {
+        MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        result.host = "host";
+        result.username = "username";
+        result.password = "password";
+        result.port = 3306;
+        result.database = "database";
 
-            MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
-            result2.host = "host";
-            result2.username = "username";
-            result2.password = "password";
-            result2.port = 3306;
-            result2.database = "database";
+        assertNotEquals(new JawsDBMaria(result), new JawsDBMySQL(result));
+    }
 
-            assertNotEquals(new JawsDBMaria(result1), new JawsDBMySQL(result2));
-            assertNotEquals(new JawsDBMySQL(result1), new JawsDBMaria(result2));
-        }
+    @Test
+    void hashCode_equals() {
+        MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
+        result1.host = "host";
+        result1.username = "username";
+        result1.password = "password";
+        result1.port = 3306;
+        result1.database = "database";
+
+        MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
+        result2.host = "host";
+        result2.username = "username";
+        result2.password = "password";
+        result2.port = 3306;
+        result2.database = "database";
+
+        assertEquals(new JawsDBMySQL(result1).hashCode(), new JawsDBMySQL(result1).hashCode());
+        assertEquals(new JawsDBMySQL(result1).hashCode(), new JawsDBMySQL(result2).hashCode());
+    }
+
+    @Test
+    void hashCode_notEquals() {
+        MySQLUrlParser.Result result1 = new MySQLUrlParser.Result();
+        result1.host = "host";
+        result1.username = "username";
+        result1.password = "password";
+        result1.port = 3306;
+        result1.database = "database";
+
+        MySQLUrlParser.Result result2 = new MySQLUrlParser.Result();
+        result2.host = "host";
+        result2.username = "username";
+        result2.password = "password";
+        result2.port = 3307;
+        result2.database = "database";
+
+        assertNotEquals(new JawsDBMySQL(result1).hashCode(), new JawsDBMySQL(result2).hashCode());
     }
 }
