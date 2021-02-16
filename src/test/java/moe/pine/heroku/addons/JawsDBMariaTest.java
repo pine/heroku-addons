@@ -9,18 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+
 @SuppressWarnings({"ResultOfMethodCallIgnored", "OverlyStrongTypeCast"})
 class JawsDBMariaTest {
     @Test
     void getTest() {
-        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
 
-        final JawsDBMaria jawsDBMaria = new JawsDBMaria(result);
+        JawsDBMaria maria = new JawsDBMaria(result);
         JawsDBMaria.get(); // Pre-load `Holder` class
 
-        Whitebox.setInternalState(JawsDBMaria.Holder.class, "INSTANCE", jawsDBMaria);
-        assertSame(jawsDBMaria, JawsDBMaria.get());
+        Whitebox.setInternalState(JawsDBMaria.Holder.class, "INSTANCE", maria);
+        assertSame(maria, JawsDBMaria.get());
 
         Whitebox.setInternalState(JawsDBMaria.Holder.class, "INSTANCE", (JawsDBMaria) null);
         assertNull(JawsDBMaria.get());
@@ -28,46 +29,46 @@ class JawsDBMariaTest {
 
     @Test
     void constructorTest() {
-        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
         result.username = "username";
         result.password = "password";
         result.port = 3306;
         result.database = "database";
 
-        final JawsDBMaria jawsDBMaria = new JawsDBMaria(result);
-        assertEquals("host", jawsDBMaria.getHost());
-        assertEquals("username", jawsDBMaria.getUsername());
-        assertEquals("password", jawsDBMaria.getPassword());
-        assertEquals(3306, jawsDBMaria.getPort());
-        assertEquals("database", jawsDBMaria.getDatabase());
+        JawsDBMaria maria = new JawsDBMaria(result);
+        assertEquals("host", maria.getHost());
+        assertEquals("username", maria.getUsername());
+        assertEquals("password", maria.getPassword());
+        assertEquals(3306, maria.getPort());
+        assertEquals("database", maria.getDatabase());
     }
 
     @Test
     void getUsernameTest_illegalState() {
-        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
 
-        final JawsDBMaria jawsDBMaria = new JawsDBMaria(result);
-        assertThrows(IllegalStateException.class, jawsDBMaria::getUsername);
+        JawsDBMaria maria = new JawsDBMaria(result);
+        assertThrows(IllegalStateException.class, maria::getUsername);
     }
 
     @Test
     void getPasswordTest_illegalState() {
-        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
 
-        final JawsDBMaria jawsDBMaria = new JawsDBMaria(result);
-        assertThrows(IllegalStateException.class, jawsDBMaria::getPassword);
+        JawsDBMaria maria = new JawsDBMaria(result);
+        assertThrows(IllegalStateException.class, maria::getPassword);
     }
 
     @Test
     void getDatabaseTest_illegalState() {
-        final MySQLUrlParser.Result result = new MySQLUrlParser.Result();
+        MySQLUrlParser.Result result = new MySQLUrlParser.Result();
         result.host = "host";
 
-        final JawsDBMaria jawsDBMaria = new JawsDBMaria(result);
-        assertThrows(IllegalStateException.class, jawsDBMaria::getDatabase);
+        JawsDBMaria maria = new JawsDBMaria(result);
+        assertThrows(IllegalStateException.class, maria::getDatabase);
     }
 
     @Test
@@ -86,8 +87,13 @@ class JawsDBMariaTest {
         result2.port = 3306;
         result2.database = "database";
 
-        assertEquals(new JawsDBMaria(result1), new JawsDBMaria(result1));
-        assertEquals(new JawsDBMaria(result1), new JawsDBMaria(result2));
+        JawsDBMaria maria1 = new JawsDBMaria(result1);
+        JawsDBMaria maria2 = new JawsDBMaria(result1);
+        JawsDBMaria maria3 = new JawsDBMaria(result2);
+
+        assertEquals(maria1, maria1);
+        assertEquals(maria1, maria2);
+        assertEquals(maria1, maria3);
     }
 
     @Test
@@ -106,7 +112,11 @@ class JawsDBMariaTest {
         result2.port = 3307;
         result2.database = "database";
 
-        assertNotEquals(new JawsDBMaria(result1), new JawsDBMaria(result2));
+        JawsDBMaria maria1 = new JawsDBMaria(result1);
+        JawsDBMaria maria2 = new JawsDBMaria(result2);
+
+        assertNotEquals(maria1, null);
+        assertNotEquals(maria1, maria2);
     }
 
     @Test
@@ -125,8 +135,11 @@ class JawsDBMariaTest {
         result2.port = 3306;
         result2.database = "database";
 
-        assertEquals(new JawsDBMaria(result1).hashCode(), new JawsDBMaria(result1).hashCode());
-        assertEquals(new JawsDBMaria(result1).hashCode(), new JawsDBMaria(result2).hashCode());
+        JawsDBMaria maria1 = new JawsDBMaria(result1);
+        JawsDBMaria maria2 = new JawsDBMaria(result2);
+
+        assertEquals(maria1.hashCode(), maria1.hashCode());
+        assertEquals(maria1.hashCode(), maria2.hashCode());
     }
 
     @Test
@@ -145,7 +158,10 @@ class JawsDBMariaTest {
         result2.port = 3307;
         result2.database = "database";
 
-        assertNotEquals(new JawsDBMaria(result1).hashCode(), new JawsDBMaria(result2).hashCode());
+        JawsDBMaria maria1 = new JawsDBMaria(result1);
+        JawsDBMaria maria2 = new JawsDBMaria(result2);
+        
+        assertNotEquals(maria1.hashCode(), maria2.hashCode());
     }
 
     @Test

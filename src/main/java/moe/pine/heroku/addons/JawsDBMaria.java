@@ -25,8 +25,8 @@ public final class JawsDBMaria {
         }
 
         static {
-            final String mariaUrl = System.getenv("JAWSDB_MARIA_URL");
-            final MySQLUrlParser.Result result = MySQLUrlParser.parse(mariaUrl);
+            String mariaUrl = System.getenv("JAWSDB_MARIA_URL");
+            MySQLUrlParser.Result result = MySQLUrlParser.parse(mariaUrl);
             if (result != null) {
                 INSTANCE = new JawsDBMaria(result);
             } else {
@@ -35,7 +35,7 @@ public final class JawsDBMaria {
         }
     }
 
-    JawsDBMaria(final MySQLUrlParser.Result result) {
+    JawsDBMaria(MySQLUrlParser.Result result) {
         host = Objects.requireNonNull(result.host);
         username = result.username;
         password = result.password;
