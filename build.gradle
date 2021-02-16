@@ -5,8 +5,6 @@ buildscript {
         group = 'moe.pine'
         websiteUrl = 'https://github.com/pine/heroku-addons'
         gitUrl = 'https://github.com/pine/heroku-addons.git'
-        issueTrackerUrl = 'https://github.com/pine/heroku-addons/issues'
-        userOrg = 'pinemz'
 
         junitVersion = '5.6.0'
         powermockVersion = '2.0.5'
