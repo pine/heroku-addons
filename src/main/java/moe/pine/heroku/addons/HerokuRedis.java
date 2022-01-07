@@ -17,8 +17,8 @@ public final class HerokuRedis {
         }
 
         static {
-            String redisUrl = System.getenv("REDIS_URL");
-            RedisUrlParser.Result result = RedisUrlParser.parse(redisUrl);
+            final String redisUrl = System.getenv("REDIS_URL");
+            final RedisUrlParser.Result result = RedisUrlParser.parse(redisUrl);
             if (result != null) {
                 INSTANCE = new HerokuRedis(result);
             } else {
@@ -28,7 +28,7 @@ public final class HerokuRedis {
     }
 
     HerokuRedis(RedisUrlParser.Result result) {
-        host = Objects.requireNonNull(result.host);
+        host = Objects.requireNonNull(result.host, "result.host");
         password = result.password;
         port = result.port;
     }
