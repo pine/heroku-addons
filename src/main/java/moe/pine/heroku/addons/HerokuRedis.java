@@ -33,14 +33,33 @@ public final class HerokuRedis {
         port = result.port;
     }
 
+    /**
+     * Get a cached {@link HerokuRedis} instance.
+     * <p>
+     * This instance will be initialized from the environment variable {@code REDIS_URL}
+     * when {@link #get} is called for the first time.
+     *
+     * @return cached instance, or {@code null} if the environment variable not found
+     */
     public static @Nullable HerokuRedis get() {
         return Holder.INSTANCE;
     }
 
+    /**
+     * Get Redis host name
+     *
+     * @return host name
+     */
     public @NonNull String getHost() {
         return host;
     }
 
+    /**
+     * Get Redis password
+     *
+     * @return password
+     * @throws IllegalStateException if the password doesn't exist
+     */
     public @NonNull String getPassword() {
         if (password == null) {
             throw new IllegalStateException("Heroku Redis should have `password`, but not.");
@@ -48,6 +67,11 @@ public final class HerokuRedis {
         return password;
     }
 
+    /**
+     * Get Redis port number
+     *
+     * @return port number
+     */
     public int getPort() {
         return port;
     }
