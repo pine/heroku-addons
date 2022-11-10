@@ -20,7 +20,8 @@ buildscript {
 }
 
 plugins {
-  id 'com.github.spotbugs' version '5.0.13'
+    id 'jacoco'
+    id 'com.github.spotbugs' version '5.0.13'
 }
 
 
@@ -84,10 +85,8 @@ buildtimetracker {
 
 // ----- JaCoCo ---------------------------------------
 
-apply plugin: 'jacoco'
-
 jacoco {
-    toolVersion = '0.8.3'
+    toolVersion = '0.8.8'
 }
 
 jacocoTestReport {
