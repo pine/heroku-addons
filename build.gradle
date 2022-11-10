@@ -111,7 +111,6 @@ spotbugsMain {
 
 // ----- Checker Framework ----------------------------
 
-apply plugin: 'org.checkerframework'
 checkerFramework {
     excludeTests = true
 
